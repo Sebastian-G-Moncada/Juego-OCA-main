@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Oca</title>
+    <link rel="stylesheet" href="style.css">
+	<link  rel = "icon"  type = "image/png"  sizes = "16x16"  href = "Imagenes/favicon-16x16.png" >
+</head>
+
+<body>
+    <h1>Juego de la Oca</h1>
+
+    <section> 
+        <div class="tablero">
+                <img src="Imagenes/gansoAzul.png" alt="Ficha" id="img4">
+                <img src="Imagenes/gansoRojo.png" alt="Ficha2" id="img5">
+            <div id="casilla1">
+                <article id="texto1">
+                    <p id="inicio">Start</p>
+                </article>
+            </div>
+            <div id="casilla2">
+                <article id="texto2">1</article>
+            </div>
+            <div id="casilla3">
+                <article id="texto3">2</article>
+            </div>
+            <div id="casilla4">
+                <article id="texto4">3</article>
+            </div>
+            <div id="casilla5">
+                <article id="texto5">4</article>
+            </div>
+            <div id="casilla6">
+                <article id="texto6">5</article>
+            </div>
+            <div id="casilla7">
+                <article id="texto7">6</article>
+            </div>
+            <div id="casilla8">
+                <article id="texto8">7</article>
+            </div>
+            <div id="casilla9">
+                <article id="texto9">8</article>
+            </div>
+            <div id="casilla10">
+                <article id="texto10">9</article>
+            </div>
+            <div id="casilla11">
+                <article id="texto11">10</article>
+            </div>
+            <div id="casilla12">
+                <article id="texto12">11</article>
+            </div>
+            <div id="casilla13">
+                <article id="texto13">12</article>
+            </div>
+            <div id="casilla14">
+                <article id="texto14">13</article>
+            </div>
+            <div id="casilla15">
+                <article id="texto15">14</article>
+            </div>
+            <div id="casilla16">
+                <article id="texto16">15</article>
+            </div>
+            <div id="casilla17">
+                <article id="texto17">16</article>
+            </div>
+            <div id="casilla18">
+                <article id="texto18">17</article>
+            </div>
+            <div id="casilla19">
+                <article id="texto19">18</article>
+            </div>
+            <div id="casilla20">
+                <article id="texto20">19</article>
+            </div>
+            <div id="casilla21">
+                <article id="texto21">20</article>
+            </div>
+            <div id="casilla22">
+                <article id="texto22">21</article>
+            </div>
+            <div id="casilla23">
+                <article id="texto23">22</article>
+            </div>
+            <div id="casilla24">
+                <article id="texto24">23</article>
+            </div>
+            <div id="casilla25">
+                <article id="texto25">
+                    <p id="final">Finish</p>
+                    <img src="Imagenes/ganso.png" alt="ganso" id="img1">
+            </article>
+            </div>
+            <p id="textoOca">Oca</p>
+        </div>
+    </section>
+    <section>
+        <div class="boton">
+            <!-- <button id="btn-Azul">Ficha Azul</button> -->
+            <input type="button" id="btn-Azul" value="Ficha Azul" onclick="disabled = true" >
+        </div>
+        <div class="boton">
+            <!-- <button id="btn-Roja">Ficha Roja</button> -->
+            <input type="button" id="btn-Roja" value="Ficha Roja" onclick="disabled = true" >
+        </div>
+        <div class="boton">
+            <button id="btn-Tirar">Tirar</button>
+            <img src="Imagenes/dado1.png" alt="dados" id="img3">
+        </div>
+    </section>
+
+    <script>
+
+        //arreglo de 26 elementos que representa el tablero a partir del primer elemento
+        var fichaAzul = [[25,15],[225,15],[325,15],[435,15],[545,15],[655,15],[765,15],[870,15],[870,125],[870,235],[870,345],[870,475],[760,475],[650,475],[533,475],[430,475],
+        [320,475],[210,475],[25,474],[25,345],[25,190],[125,190],[235,190],[345,190],[500,190],[500,190],[500,190],[500,190],[500,190],[500,190],[500,190],[500,190]];
+        //console.log(fichaAzul);
+        var prueba2 = [[125,15],[270,15],[379,15],[485,15],[595,15],[705,15],[815,15],[917,15],[917,125],[917,235],[917,345],[870,475],[805,475],[695,475],[588,475],[478,475],
+        [368,475],[258,475],[73,475],[60,399],[60,280],[175,190],[289,190],[395,190],[545,190],[545,190],[545,190],[545,190],[545,190],[545,190],[545,190],[545,190],];
+
+        var posicionJugador1 = 0;
+        var posicionJugador2 = 0;
+        var fichaSeleccionada;
+        var fichaJugador1;
+        var fichaJugador2;
+        var dado = 0;
+        var turno = 1;
+        var resultado;
+        var posX = 0;
+        var posY = 0;
+        
+        alert("Bienvenido al juego de la Oca");
+        alert("El juego consiste en que el jugador debe llevar la ficha hasta el final del tablero");
+        alert("Reglas: El jugador debel elegir que ficha usar, luego tirar el dado, y luego se moverá la ficha");
+
+        btnAzul = document.getElementById("btn-Azul");
+        btnRoja = document.getElementById("btn-Roja");
+        btnTirar = document.getElementById("btn-Tirar");
+
+        btnAzul.addEventListener("click", function () {
+            fichaSeleccionada = "Azul";
+            seleccionarFicha();
+            clickDesactivar();
+        });
+
+        btnRoja.addEventListener("click", function () {
+            fichaSeleccionada = "Roja";
+            seleccionarFicha();
+            clickDesactivar();
+        });
+
+        btnTirar.addEventListener("click", function () {
+            tirarDados();
+        });        
+
+        function clickDesactivar(boton) {
+            btnAzul.disabled = true;
+            btnRoja.disabled = true;
+        }
+
+        function seleccionarFicha() {
+            //seleccionar ficha Roja o Azul
+            if (fichaSeleccionada == "Roja") {
+                fichaJugador1 = "roja";
+                fichaJugador2 = "azul";
+
+                console.log("ficha seleccionada por  el jugador1 " + fichaJugador1);
+                console.log("ficha seleccionada por  el jugador2 " + fichaJugador2);
+            } else if (fichaSeleccionada == "Azul") {
+                fichaJugador1 = "azul";
+                fichaJugador2 = "roja";
+
+                console.log("ficha seleccionada por  el jugador1 " + fichaJugador1);
+                console.log("ficha seleccionada por  el jugador2 " + fichaJugador2);
+            }
+        }
+
+        //mover sobre el tablero al ganzo
+        function moverFichaAzul() {
+            fichaSeleccionada = document.getElementById("img4");
+            fichaSeleccionada.style.position = "absolute";
+            fichaSeleccionada.style.left = 0 + posX + "px";
+            fichaSeleccionada.style.bottom = 0 + posY + "px";
+        }
+        
+        function moverFichaRoja() {
+            fichaSeleccionada = document.getElementById("img5");
+            fichaSeleccionada.style.position = "absolute";
+            fichaSeleccionada.style.left = 0 + posX + "px";
+            fichaSeleccionada.style.bottom = 0 + posY + "px";
+        }
+
+        function sacarPocicionAzul() {
+            resultado = 0;
+            resultado = posicionJugador1 + dado;
+            //console.log(prueba[resultado][0]);
+            //console.log(prueba[resultado][1]);
+            posicionJugador1 = resultado;
+            casilla5();
+            casilla9();
+            casilla13();
+            casilla17();
+            casilla21();
+            sacarXyYAzul();
+        }
+
+        function sacarPocicionRoja() {
+            resultado = 0;
+            resultado = posicionJugador2 + dado;
+            //console.log(prueba[resultado][0]);
+            //console.log(prueba[resultado][1]);
+            posicionJugador2 = resultado;
+            casilla5();
+            casilla9();
+            casilla13();
+            casilla17();
+            casilla21();
+            sacarXyYRoja();
+            //console.log(posX);
+            //console.log(posY);
+        }
+
+        //sacar pocicion de la ficha
+        function sacarXyYAzul() {
+            posX = fichaAzul[resultado][0];
+            posY = fichaAzul[resultado][1];
+            //console.log(posX);
+            //console.log(posY);
+        }
+
+        function sacarXyYRoja() {
+            posX = prueba2[resultado][0];
+            posY = prueba2[resultado][1];
+            //console.log(posX);
+            //console.log(posY);
+        }
+
+        //regresar atras si no quedas en el lugar 25 del arreglo
+        function regresarPocicionAzul() {
+            if (posicionJugador1 >= 25) {
+                posicionJugador1 = posicionJugador1 - (posicionJugador1 - 25);
+                console.log(posicionJugador1);
+            }
+        }
+
+        //hacer que los dos jugadores tiren con el mismo dado
+        function tirarDadosJugador1() {
+            dado = Math.floor(Math.random() * 6) + 1;
+            console.log(dado);
+            if (fichaJugador1 == "azul") {
+                cambiarImagen();
+                sacarPocicionAzul();
+                moverFichaAzul();
+            } else if (fichaJugador1 == "roja") {
+                cambiarImagen();
+                sacarPocicionRoja();
+                moverFichaRoja();
+            }
+        }
+
+        function tirarDadosJugador2() {
+            dado = Math.floor(Math.random() * 6) + 1;
+            console.log(dado);
+            if (fichaJugador2 == "azul") {
+                cambiarImagen();
+                sacarPocicionAzul();
+                moverFichaAzul();
+            } else if (fichaJugador2 == "roja") {
+                cambiarImagen();
+                sacarPocicionRoja();
+                moverFichaRoja();
+            }
+        }
+        
+        //rotar el dado entre jugador 1 y jugador 2
+        function rotarDado() {
+            if (turno == 1) {
+                tirarDadosJugador1();
+                turno = 2;
+            } else if (turno == 2) {
+                tirarDadosJugador2();
+                turno = 1;
+            }
+        }
+
+        function tirarDados() {
+            rotarDado();
+            ganarJugador1();
+            ganarJugador2();
+        }
+
+        function cambiarImagen() {
+            let contador = 0;
+            var intervalo = setInterval(function () {
+                contador++;
+                document.getElementById("img3").src = "Imagenes/dado" + contador + ".png";
+                if (contador == dado) {
+                    clearInterval(intervalo);
+                    contador = 0;
+                }
+            }, 100);
+        }
+
+        //detener el juego al ganar un jugador
+        function detenerJuego() {
+            if (posicionJugador1 == 25) {
+                alert("Ganador Jugador 1");
+                btnTirar.disabled = true;
+                btnEnviar.disabled = true;
+            } else if (posicionJugador2 == 25) {
+                alert("Ganador Jugador 2");
+                btnTirar.disabled = true;
+                btnEnviar.disabled = true;
+            }
+        }
+        
+        function casilla5(){
+            if(posicionJugador1 == 4){
+                posicionJugador1 = posicionJugador1 + 3;
+                resultado = resultado + 3;
+                alert("vas a caer en la casilla Especial 4 \n Avanzaras 3 casillas extras mas lo de tu Dado \n caeras en la casilla: " + posicionJugador1);
+            }else if(posicionJugador2 == 4){
+                posicionJugador2 = posicionJugador2 + 3;
+                resultado = resultado + 3;
+                alert("vas a caer en la casilla Especial 4 \n Avanzaras 3 casillas extras mas lo de tu Dado \n caeras en la casilla: " + posicionJugador2);
+            }
+        }
+
+        function casilla13(){
+            if(posicionJugador1 == 13){
+                posicionJugador1 = posicionJugador1 + 3;
+                resultado = resultado + 3;
+                alert("vas a caer en la casilla Especial 13 \n Avanzaras 3 casillas extras mas lo de tu Dado \n caeras en la casilla: " + posicionJugador1);
+            }else if(posicionJugador2 == 13){
+                posicionJugador2 = posicionJugador2 + 3;
+                resultado = resultado + 3;
+                alert("vas a caer en la casilla Especial 13 \n Avanzaras 3 casillas extras mas lo de tu Dado \n caeras en la casilla: " + posicionJugador2);
+            }
+        };
+
+        function casilla9(){
+            if(posicionJugador1 == 9){
+                posicionJugador1 = posicionJugador1 - 3;
+                resultado = resultado - 3;
+                alert("vas a caer en la casilla Especial 9 \n Avanzaras lo de tu Dado y retrocedes 3 casillas \n caeras en la casilla: " + posicionJugador1);
+            }else if(posicionJugador2 == 9){
+                posicionJugador2 = posicionJugador2 - 3;
+                resultado = resultado - 3;
+                alert("vas a caer en la casilla Especial 9 \n Avanzaras lo de tu Dado y retrocedes 3 casillas \n caeras en la casilla: " + posicionJugador2);
+            }
+        }
+        
+        function casilla17(){
+            if(posicionJugador1 == 17){
+                posicionJugador1 = posicionJugador1 - 3;
+                resultado = resultado - 3;
+                alert("vas a caer en la casilla Especial 13 \n Avanzaras lo de tu Dado y retrocedes 3 casillas \n caeras en la casilla: " + posicionJugador1);
+            }else if(posicionJugador2 == 17){
+                posicionJugador2 = posicionJugador2 - 3;
+                resultado = resultado - 3;
+                alert("vas a caer en la casilla Especial 13 \n Avanzaras lo de tu Dado y retrocedes 3 casillas \n caeras en la casilla: " + posicionJugador2);
+            }
+        }
+
+        function casilla21(){
+            if(posicionJugador1 == 21){
+                alert("Vas a caer en una casilla Especial  \n Regresas a la casilla Uno");
+                posicionJugador1 = 0;
+                resultado = 0;
+            }else if(posicionJugador2 == 21){
+                alert("Vas a caer en una casilla Especial  \n Regresas a la casilla Uno");
+                posicionJugador2 = 0;
+                resultado = 0;
+            }
+        }
+
+        //Hacer que ganen los jugadores cuando lleguen a la casilla 25
+        function ganarJugador1() {
+            if (posicionJugador1 >= 24) {
+                btnTirar.disabled = true;
+                setTimeout(function () {
+                    alert("Ganador Jugador 1");
+                }, 100);
+            }
+        }
+
+        function ganarJugador2() {
+            if (posicionJugador2 >= 24) {
+                btnTirar.disabled = true;
+                setTimeout(function () {
+                    alert("Ganador Jugador 1");
+                }, 100);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
